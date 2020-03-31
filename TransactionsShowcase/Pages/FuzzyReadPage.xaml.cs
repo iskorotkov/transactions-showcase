@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
 
@@ -10,39 +11,66 @@ namespace TransactionsShowcase.Pages
     public partial class FuzzyReadPage : Page
     {
         private readonly EmpiresManager _empiresManager = new EmpiresManager();
+        private int? _firstPower;
+        private int? _secondPower;
 
         public FuzzyReadPage()
         {
             InitializeComponent();
+
+            TransactionControl.EmpiresManager = _empiresManager;
+            TransactionControl.IsolationLevel = IsolationLevel.RepeatableRead;
+
+            Reload(null, null);
+        }
+
+        private void ConfirmFirst(object sender, RoutedEventArgs e)
+        {
+            var empire = (Empires) FirstEmpireBox.SelectedItem;
+            _firstPower = empire?.Power;
+            FirstPowerBlock.Text = $"Power = {_firstPower}";
+            ShowResult();
+        }
+
+        private void ConfirmSecond(object sender, RoutedEventArgs e)
+        {
+            var empire = (Empires) SecondEmpireBox.SelectedItem;
+            _secondPower = empire?.Power;
+            SecondPowerBlock.Text = $"Power = {_secondPower}";
+            ShowResult();
+        }
+
+        private void ShowResult()
+        {
+            if (_firstPower == null || _secondPower == null)
+            {
+                return;
+            }
+
+            if (_firstPower > _secondPower)
+            {
+                OutputBlock.Text = $"First empire is stronger by {_firstPower - _secondPower} points";
+            }
+            else if (_secondPower > _firstPower)
+            {
+                OutputBlock.Text = $"Second empire is stronger by {_secondPower - _firstPower} points";
+            }
+            else
+            {
+                OutputBlock.Text = "Powers are equal";
+            }
         }
 
 
-        private void FetchEmpires(object sender, RoutedEventArgs e)
+        private void Reload(object sender, RoutedEventArgs e)
         {
-            EmpiresList.Items.Clear();
+            FirstEmpireBox.Items.Clear();
+            SecondEmpireBox.Items.Clear();
             foreach (var empire in _empiresManager.GetEmpires())
             {
-                EmpiresList.Items.Add(empire);
+                FirstEmpireBox.Items.Add(empire);
+                SecondEmpireBox.Items.Add(empire);
             }
-        }
-
-        private void FetchEmpiresWithRuler(object sender, RoutedEventArgs e)
-        {
-            EmpiresWithRulerList.Items.Clear();
-            foreach (var empire in _empiresManager.GetEmpiresWithRuler())
-            {
-                EmpiresWithRulerList.Items.Add(empire);
-            }
-        }
-
-        private void BeginTransaction(object sender, RoutedEventArgs e)
-        {
-            _empiresManager.BeginTransaction();
-        }
-
-        private void Commit(object sender, RoutedEventArgs e)
-        {
-            _empiresManager.CommitTransaction();
         }
     }
 }

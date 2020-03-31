@@ -25,7 +25,11 @@ namespace TransactionsShowcase.Db
 
         public void BeginTransaction(IsolationLevel level = IsolationLevel.ReadCommitted)
         {
-            _connection.Open();
+            if (_connection.State == ConnectionState.Closed)
+            {
+                _connection.Open();
+            }
+            _transaction?.Dispose();
             _transaction = _connection.BeginTransaction(level);
         }
 
@@ -81,6 +85,12 @@ namespace TransactionsShowcase.Db
         {
             _connection.Execute("update empires set power = @power where id = @id",
                 new { id, power }, _transaction);
+        }
+
+        public void AddPower(int id, int diff)
+        {
+            _connection.Execute("update empires set power = power + @diff where id = @id",
+                new { id, diff }, _transaction);
         }
 
         public int GetSumOfPowers()

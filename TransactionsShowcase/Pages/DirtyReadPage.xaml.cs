@@ -32,13 +32,13 @@ namespace TransactionsShowcase.Pages
         private void ReducePower(object sender, RoutedEventArgs e)
         {
             var empire = (Empires) FromEmpireBox.SelectedItem;
-            _empiresManager.SetPower(empire.Id, empire.Power - Amount);
+            _empiresManager.AddPower(empire.Id, -Amount);
         }
 
         private void IncreasePower(object sender, RoutedEventArgs e)
         {
             var empire = (Empires) ToEmpireBox.SelectedItem;
-            _empiresManager.SetPower(empire.Id, empire.Power + Amount);
+            _empiresManager.AddPower(empire.Id, Amount);
         }
 
         private void FetchSum(object sender, RoutedEventArgs e)
