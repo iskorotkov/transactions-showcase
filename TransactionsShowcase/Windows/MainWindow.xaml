@@ -11,6 +11,10 @@
             <Frame Source="../Pages/DirtyWritePage.xaml" />
         </TabItem>
 
+        <TabItem Header="Dirty read">
+            <Frame Source="../Pages/DirtyReadPage.xaml" />
+        </TabItem>
+
         <TabItem Header="Fuzzy read">
             <Frame Source="../Pages/FuzzyReadPage.xaml" />
         </TabItem>

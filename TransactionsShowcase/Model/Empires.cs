@@ -20,5 +20,7 @@ namespace TransactionsShowcase
         public virtual GovernmentTypes GovernmentType { get; set; }
         public virtual ICollection<AlliancesEntries> AlliancesEntries { get; set; }
         public virtual ICollection<Planets> Planets { get; set; }
+
+        public override string ToString() => Name;
     }
 }
