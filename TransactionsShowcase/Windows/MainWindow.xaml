@@ -18,5 +18,9 @@
         <TabItem Header="Fuzzy read">
             <Frame Source="../Pages/FuzzyReadPage.xaml" />
         </TabItem>
+
+        <TabItem Header="Lost update">
+            <Frame Source="../Pages/LostUpdate.xaml" />
+        </TabItem>
     </TabControl>
 </Window>

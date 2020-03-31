@@ -33,31 +33,12 @@ namespace TransactionsShowcase.Db
             _transaction = _connection.BeginTransaction(level);
         }
 
-        public void Add(string name, string ruler, int govId, int power)
-        {
-            _connection.Execute(
-                "insert into empires(name, ruler, government_type_id, power) values(@name, @ruler, @govId, @power)",
-                new { name, ruler, govId, power }, _transaction);
-        }
-
         public IEnumerable<Empire> GetEmpires()
         {
             return _connection.Query<Empire>(@"
                 select id, name, ruler, power, government_type_id as GovernmentTypeId
                 from empires
                 order by id", _transaction);
-        }
-
-        public void AdjustPowersIfLess(int threshold, int power)
-        {
-            _connection.Execute("update empires set power = @power where power < @threshold",
-                new { threshold, power }, _transaction);
-        }
-
-        public void AdjustPowersIfMoreOrEqual(int threshold, int power)
-        {
-            _connection.Execute("update empires set power = @power where power >= @threshold",
-                new { threshold, power }, _transaction);
         }
 
         public void SetPower(int power)
@@ -72,25 +53,16 @@ namespace TransactionsShowcase.Db
                 new { id }, _transaction);
         }
 
-        public IEnumerable<Empire> GetEmpiresWithRuler()
-        {
-            return _connection.Query<Empire>(@"
-                select id, name, ruler, power, government_type_id as GovernmentTypeId
-                from empires
-                where ruler is not null
-                order by id", _transaction);
-        }
-
-        public void SetPower(int id, int power)
-        {
-            _connection.Execute("update empires set power = @power where id = @id",
-                new { id, power }, _transaction);
-        }
-
         public void AddPower(int id, int diff)
         {
             _connection.Execute("update empires set power = power + @diff where id = @id",
                 new { id, diff }, _transaction);
+        }
+
+        public void AddPower(int diff)
+        {
+            _connection.Execute("update empires set power = power + @diff",
+                new { diff }, _transaction);
         }
 
         public int GetSumOfPowers()
