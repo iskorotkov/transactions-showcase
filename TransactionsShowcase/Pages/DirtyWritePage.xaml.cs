@@ -18,15 +18,11 @@ namespace TransactionsShowcase.Pages
         public DirtyWritePage()
         {
             InitializeComponent();
-        }
 
-        private void FetchEmpires(object sender, RoutedEventArgs e)
-        {
-            EmpiresList.Items.Clear();
-            foreach (var empire in _empiresManager.GetEmpires())
-            {
-                EmpiresList.Items.Add(empire);
-            }
+            TransactionControl.IsolationLevel = IsolationLevel.ReadUncommitted;
+            TransactionControl.EmpiresManager = _empiresManager;
+
+            EmpiresList.EmpiresManager = _empiresManager;
         }
 
         private void BeginTransaction(object sender, RoutedEventArgs e)
