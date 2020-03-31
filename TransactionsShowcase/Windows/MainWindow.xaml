@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <TabControl>
+        <TabItem Header="Dirty write">
+            <Frame Source="../Pages/DirtyWritePage.xaml" />
+        </TabItem>
+
         <TabItem Header="Fuzzy read">
             <Frame Source="../Pages/FuzzyReadPage.xaml" />
         </TabItem>
