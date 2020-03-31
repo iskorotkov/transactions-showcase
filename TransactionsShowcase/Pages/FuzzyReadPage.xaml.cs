@@ -26,7 +26,7 @@ namespace TransactionsShowcase.Pages
 
         private void ConfirmFirst(object sender, RoutedEventArgs e)
         {
-            var empire = (Empires) FirstEmpireBox.SelectedItem;
+            var empire = (Empire) FirstEmpireBox.SelectedItem;
             _firstPower = empire?.Power;
             FirstPowerBlock.Text = $"Power = {_firstPower}";
             ShowResult();
@@ -34,7 +34,7 @@ namespace TransactionsShowcase.Pages
 
         private void ConfirmSecond(object sender, RoutedEventArgs e)
         {
-            var empire = (Empires) SecondEmpireBox.SelectedItem;
+            var empire = (Empire) SecondEmpireBox.SelectedItem;
             _secondPower = empire?.Power;
             SecondPowerBlock.Text = $"Power = {_secondPower}";
             ShowResult();

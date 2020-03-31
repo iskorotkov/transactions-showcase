@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TransactionsShowcase
 {
-    public partial class Commanders
+    public partial class Commander
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,7 +12,7 @@ namespace TransactionsShowcase
         public int Skill { get; set; }
         public int RankId { get; set; }
 
-        public virtual Ranks Rank { get; set; }
-        public virtual Fleets Fleets { get; set; }
+        public virtual Rank Rank { get; set; }
+        public virtual Fleet Fleets { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TransactionsShowcase
 {
-    public partial class Planets
+    public partial class Planet
     {
         public int Id { get; set; }
         public int Size { get; set; }
@@ -14,8 +14,8 @@ namespace TransactionsShowcase
         public int StarId { get; set; }
         public string Name { get; set; }
 
-        public virtual Empires Empire { get; set; }
-        public virtual Stars Star { get; set; }
-        public virtual Shipyards Shipyards { get; set; }
+        public virtual Empire Empire { get; set; }
+        public virtual Star Star { get; set; }
+        public virtual Shipyard Shipyards { get; set; }
     }
 }

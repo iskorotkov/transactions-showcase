@@ -40,9 +40,9 @@ namespace TransactionsShowcase.Db
                 new { name, ruler, govId, power }, _transaction);
         }
 
-        public IEnumerable<Empires> GetEmpires()
+        public IEnumerable<Empire> GetEmpires()
         {
-            return _connection.Query<Empires>(@"
+            return _connection.Query<Empire>(@"
                 select id, name, ruler, power, government_type_id as GovernmentTypeId
                 from empires
                 order by id", _transaction);
@@ -72,9 +72,9 @@ namespace TransactionsShowcase.Db
                 new { id }, _transaction);
         }
 
-        public IEnumerable<Empires> GetEmpiresWithRuler()
+        public IEnumerable<Empire> GetEmpiresWithRuler()
         {
-            return _connection.Query<Empires>(@"
+            return _connection.Query<Empire>(@"
                 select id, name, ruler, power, government_type_id as GovernmentTypeId
                 from empires
                 where ruler is not null

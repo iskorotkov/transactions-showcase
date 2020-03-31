@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace TransactionsShowcase
 {
-    public partial class Stars
+    public partial class Star
     {
-        public Stars()
+        public Star()
         {
-            Planets = new HashSet<Planets>();
+            Planets = new HashSet<Planet>();
         }
 
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace TransactionsShowcase
         public long Age { get; set; }
         public string Name { get; set; }
 
-        public virtual StarTypes Type { get; set; }
-        public virtual ICollection<Planets> Planets { get; set; }
+        public virtual StarType Type { get; set; }
+        public virtual ICollection<Planet> Planets { get; set; }
     }
 }

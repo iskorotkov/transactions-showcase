@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace TransactionsShowcase
 {
-    public partial class StarTypes
+    public partial class Rank
     {
-        public StarTypes()
+        public Rank()
         {
-            Stars = new HashSet<Stars>();
+            Commanders = new HashSet<Commander>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Stars> Stars { get; set; }
+        public virtual ICollection<Commander> Commanders { get; set; }
     }
 }

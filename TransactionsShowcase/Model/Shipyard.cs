@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace TransactionsShowcase
 {
-    public partial class Shipyards
+    public partial class Shipyard
     {
-        public Shipyards()
+        public Shipyard()
         {
-            Spaceships = new HashSet<Spaceships>();
+            Spaceships = new HashSet<Spaceship>();
         }
 
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace TransactionsShowcase
         public int PlanetId { get; set; }
         public string Name { get; set; }
 
-        public virtual Planets Planet { get; set; }
-        public virtual ICollection<Spaceships> Spaceships { get; set; }
+        public virtual Planet Planet { get; set; }
+        public virtual ICollection<Spaceship> Spaceships { get; set; }
     }
 }

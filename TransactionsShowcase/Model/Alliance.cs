@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace TransactionsShowcase
 {
-    public partial class Alliances
+    public partial class Alliance
     {
-        public Alliances()
+        public Alliance()
         {
-            AlliancesEntries = new HashSet<AlliancesEntries>();
+            AlliancesEntries = new HashSet<AlliancesEntry>();
         }
 
         public int Id { get; set; }
         public int Power { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<AlliancesEntries> AlliancesEntries { get; set; }
+        public virtual ICollection<AlliancesEntry> AlliancesEntries { get; set; }
     }
 }

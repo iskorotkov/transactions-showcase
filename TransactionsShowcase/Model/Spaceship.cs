@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TransactionsShowcase
 {
-    public partial class Spaceships
+    public partial class Spaceship
     {
         public int Id { get; set; }
         public int Speed { get; set; }
@@ -18,7 +18,7 @@ namespace TransactionsShowcase
         public int ShipyardId { get; set; }
         public string Name { get; set; }
 
-        public virtual Fleets Fleet { get; set; }
-        public virtual Shipyards Shipyard { get; set; }
+        public virtual Fleet Fleet { get; set; }
+        public virtual Shipyard Shipyard { get; set; }
     }
 }
