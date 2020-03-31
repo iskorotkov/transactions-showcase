@@ -18,9 +18,5 @@
         <TabItem Header="Fuzzy read">
             <Frame Source="../Pages/FuzzyReadPage.xaml" />
         </TabItem>
-
-        <TabItem Header="Empires">
-            <Frame Source="../Pages/EmpiresPage.xaml" />
-        </TabItem>
     </TabControl>
 </Window>
