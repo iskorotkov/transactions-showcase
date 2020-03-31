@@ -6,26 +6,13 @@
         xmlns:local="clr-namespace:TransactionsShowcase"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <GroupBox Header="Имя">
-            <TextBox Name="NameBox" />
-        </GroupBox>
+    <TabControl>
+        <TabItem Header="Fuzzy read">
+            <Frame Source="../Pages/FuzzyReadPage.xaml" />
+        </TabItem>
 
-        <Button Content="Начать транзакцию"
-                Click="BeginTransaction" />
-
-        <Button Content="Проверить, есть ли такой элемент"
-                Click="CheckIfExists" />
-
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Уже существует: " />
-            <CheckBox IsEnabled="False"
-                      IsThreeState="True"
-                      IsChecked="{x:Null}"
-                      Name="IsExistsBox" />
-        </StackPanel>
-
-        <Button Content="Добавить"
-                Click="Create" />
-    </StackPanel>
+        <TabItem Header="Empires">
+            <Frame Source="../Pages/EmpiresPage.xaml" />
+        </TabItem>
+    </TabControl>
 </Window>

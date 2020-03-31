@@ -40,6 +40,7 @@ namespace TransactionsShowcase.Db
         {
             _connection.Execute("insert into star_types(name) values (@name)",
                 new { name }, _transaction);
+            _transaction.Commit();
         }
     }
 }
