@@ -65,6 +65,37 @@ namespace TransactionsShowcase.Db
                 new { diff }, _transaction);
         }
 
+        public void Add(Empire empire)
+        {
+            _connection.Execute(@"
+                insert into empires(name, power, government_type_id, ruler)
+                values (@name, @power, @govId, @ruler)", new
+                {
+                    name = empire.Name,
+                    power = empire.Power,
+                    govId = empire.GovernmentTypeId,
+                    ruler = empire.Ruler
+                }, _transaction);
+        }
+
+        public void SetOneAlliancePower(int power)
+        {
+            _connection.Execute(@"
+                update alliances
+                set power = @power
+                where id = (select max(id) from alliances)",
+                new { power }, _transaction);
+        }
+
+        public int GetOneAlliancePower()
+        {
+            return _connection.Query<int>(@"
+                select power
+                from alliances
+                where id = (select max(id) from alliances)",
+                _transaction).First();
+        }
+
         public int GetSumOfPowers()
         {
             return _connection.Query<int>("select sum(power) from empires", _transaction).First();

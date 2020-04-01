@@ -22,5 +22,9 @@
         <TabItem Header="Lost update">
             <Frame Source="../Pages/LostUpdate.xaml" />
         </TabItem>
+
+        <TabItem Header="Phantom">
+            <Frame Source="../Pages/PhantomPage.xaml" />
+        </TabItem>
     </TabControl>
 </Window>
