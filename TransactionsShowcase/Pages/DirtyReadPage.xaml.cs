@@ -11,6 +11,8 @@ namespace TransactionsShowcase.Pages
     /// </summary>
     public partial class DirtyReadPage : Page
     {
+        private const string SavePointName = "save";
+
         private readonly EmpiresManager _empiresManager = new EmpiresManager();
         private int Amount => int.Parse(AmountBox.Text);
 
@@ -52,6 +54,21 @@ namespace TransactionsShowcase.Pages
         private void FetchSum(object sender, RoutedEventArgs e)
         {
             SumOfPowersBlock.Text = _empiresManager.GetSumOfPowers().ToString();
+        }
+
+        private void SavePoint(object sender, RoutedEventArgs e)
+        {
+            _empiresManager.SavePoint(SavePointName);
+        }
+
+        private void RollbackToSavePoint(object sender, RoutedEventArgs e)
+        {
+            _empiresManager.Rollback(SavePointName);
+        }
+
+        private void RollbackTransaction(object sender, RoutedEventArgs e)
+        {
+            _empiresManager.Rollback();
         }
     }
 }

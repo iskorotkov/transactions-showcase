@@ -29,8 +29,24 @@ namespace TransactionsShowcase.Db
             {
                 _connection.Open();
             }
+
             _transaction?.Dispose();
             _transaction = _connection.BeginTransaction(level);
+        }
+
+        public void SavePoint(string savePoint)
+        {
+            _transaction?.Save(savePoint);
+        }
+
+        public void Rollback(string savePoint)
+        {
+            _transaction?.Rollback(savePoint);
+        }
+
+        public void Rollback()
+        {
+            _transaction?.Rollback();
         }
 
         public IEnumerable<Empire> GetEmpires()
@@ -70,12 +86,12 @@ namespace TransactionsShowcase.Db
             _connection.Execute(@"
                 insert into empires(name, power, government_type_id, ruler)
                 values (@name, @power, @govId, @ruler)", new
-                {
-                    name = empire.Name,
-                    power = empire.Power,
-                    govId = empire.GovernmentTypeId,
-                    ruler = empire.Ruler
-                }, _transaction);
+            {
+                name = empire.Name,
+                power = empire.Power,
+                govId = empire.GovernmentTypeId,
+                ruler = empire.Ruler
+            }, _transaction);
         }
 
         public void SetOneAlliancePower(int power)

@@ -12,27 +12,35 @@
     <StackPanel>
         <controls:TransactionControl x:Name="TransControl" />
 
-        <GroupBox Header="From empire">
-            <ComboBox Name="FromEmpireBox"
-                      IsEditable="False" />
-        </GroupBox>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Save point" Click="SavePoint" />
 
-        <GroupBox Header="To empire">
-            <ComboBox Name="ToEmpireBox"
-                      IsEditable="False" />
-        </GroupBox>
+            <Button Content="Rollback to save point" Click="RollbackToSavePoint" />
 
-        <GroupBox Header="Amount of power">
-            <TextBox Name="AmountBox" Text="10" />
-        </GroupBox>
+            <Button Content="Rollback transaction" Click="RollbackTransaction" />
+        </StackPanel>
 
-        <Button Content="Reduce power"
-                Click="ReducePower" />
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="From empire">
+                <ComboBox Name="FromEmpireBox" IsEditable="False" />
+            </GroupBox>
 
-        <Button Content="Increase power"
-                Click="IncreasePower" />
+            <GroupBox Header="To empire">
+                <ComboBox Name="ToEmpireBox" IsEditable="False" />
+            </GroupBox>
 
-        <StackPanel>
+            <GroupBox Header="Amount of power">
+                <TextBox Name="AmountBox" Text="10" />
+            </GroupBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Reduce power" Click="ReducePower" />
+
+            <Button Content="Increase power" Click="IncreasePower" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
             <Button Content="Fetch sum of powers" Click="FetchSum" />
 
             <GroupBox Header="Sum">
