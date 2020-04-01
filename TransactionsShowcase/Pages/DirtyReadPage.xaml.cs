@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
@@ -32,7 +33,14 @@ namespace TransactionsShowcase.Pages
         private void ReducePower(object sender, RoutedEventArgs e)
         {
             var empire = (Empire) FromEmpireBox.SelectedItem;
-            _empiresManager.AddPower(empire.Id, -Amount);
+            try
+            {
+                _empiresManager.AddPower(empire.Id, -Amount);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.InnerException?.Message ?? exception.Message);
+            }
         }
 
         private void IncreasePower(object sender, RoutedEventArgs e)
