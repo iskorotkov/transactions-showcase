@@ -12,11 +12,13 @@
     <StackPanel>
         <controls:TransactionControl x:Name="TransactionControl" />
 
-        <GroupBox Header="Amount">
-            <TextBox Name="AmountBox" Text="10" />
-        </GroupBox>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Amount">
+                <TextBox Name="AmountBox" Text="10" />
+            </GroupBox>
 
-        <Button Content="Increase power" Click="IncreasePower" />
+            <Button Content="Increase power" Click="IncreasePower" />
+        </StackPanel>
 
         <controls:EmpiresList x:Name="EmpiresList" />
     </StackPanel>
