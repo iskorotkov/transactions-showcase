@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
+using TransactionsShowcase.Utils;
 
 namespace TransactionsShowcase.Pages
 {
@@ -26,18 +27,14 @@ namespace TransactionsShowcase.Pages
 
         private void IncreasePower(object sender, RoutedEventArgs e)
         {
-            try
+            MessageOnException.Execute(() =>
             {
                 foreach (var item in EmpiresList.EmpireListView.Items)
                 {
                     var empire = (Empire) item;
                     _empiresManager.SetPower(empire.Id, empire.Power + Power);
                 }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.InnerException?.Message ?? exception.Message);
-            }
+            });
         }
     }
 }

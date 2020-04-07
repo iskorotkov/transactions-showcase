@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
+using TransactionsShowcase.Utils;
 
 namespace TransactionsShowcase.Controls
 {
@@ -20,19 +21,22 @@ namespace TransactionsShowcase.Controls
 
         private void BeginTransaction(object sender, RoutedEventArgs e)
         {
-            if (IsolationLevel != IsolationLevel.Unspecified)
+            MessageOnException.Execute(() =>
             {
-                EmpiresManager.BeginTransaction(IsolationLevel);
-            }
-            else
-            {
-                EmpiresManager.BeginTransaction();
-            }
+                if (IsolationLevel != IsolationLevel.Unspecified)
+                {
+                    EmpiresManager.BeginTransaction(IsolationLevel);
+                }
+                else
+                {
+                    EmpiresManager.BeginTransaction();
+                }
+            });
         }
 
         private void Commit(object sender, RoutedEventArgs e)
         {
-            EmpiresManager.CommitTransaction();
+            MessageOnException.Execute(() => EmpiresManager.CommitTransaction());
         }
     }
 }

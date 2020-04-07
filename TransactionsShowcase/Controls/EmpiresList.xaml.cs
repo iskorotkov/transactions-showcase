@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
+using TransactionsShowcase.Utils;
 
 namespace TransactionsShowcase.Controls
 {
@@ -19,10 +21,13 @@ namespace TransactionsShowcase.Controls
         private void FetchEmpires(object sender, RoutedEventArgs e)
         {
             EmpireListView.Items.Clear();
-            foreach (var empire in EmpiresManager.GetEmpires())
+            MessageOnException.Execute(() =>
             {
-                EmpireListView.Items.Add(empire);
-            }
+                foreach (var empire in EmpiresManager.GetEmpires())
+                {
+                    EmpireListView.Items.Add(empire);
+                }
+            });
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
+using TransactionsShowcase.Utils;
 
 namespace TransactionsShowcase.Pages
 {
@@ -27,22 +28,22 @@ namespace TransactionsShowcase.Pages
 
         private void BeginTransaction(object sender, RoutedEventArgs e)
         {
-            _empiresManager.BeginTransaction(IsolationLevel.ReadUncommitted);
+            MessageOnException.Execute(() => _empiresManager.BeginTransaction(IsolationLevel.ReadUncommitted));
         }
 
         private void Commit(object sender, RoutedEventArgs e)
         {
-            _empiresManager.CommitTransaction();
+            MessageOnException.Execute(() => _empiresManager.CommitTransaction());
         }
 
         private void UpdatePower(object sender, RoutedEventArgs e)
         {
-            _empiresManager.SetPower(Power);
+            MessageOnException.Execute(() => _empiresManager.SetPower(Power));
         }
 
         private void UpdateGovId(object sender, RoutedEventArgs e)
         {
-            _empiresManager.SetGovId(GovId);
+            MessageOnException.Execute(() => _empiresManager.SetGovId(GovId));
         }
     }
 }

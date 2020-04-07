@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
+using TransactionsShowcase.Utils;
 
 namespace TransactionsShowcase.Pages
 {
@@ -35,40 +36,33 @@ namespace TransactionsShowcase.Pages
         private void ReducePower(object sender, RoutedEventArgs e)
         {
             var empire = (Empire) FromEmpireBox.SelectedItem;
-            try
-            {
-                _empiresManager.AddPower(empire.Id, -Amount);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.InnerException?.Message ?? exception.Message);
-            }
+            MessageOnException.Execute(() => _empiresManager.AddPower(empire.Id, -Amount));
         }
 
         private void IncreasePower(object sender, RoutedEventArgs e)
         {
             var empire = (Empire) ToEmpireBox.SelectedItem;
-            _empiresManager.AddPower(empire.Id, Amount);
+            MessageOnException.Execute(() => _empiresManager.AddPower(empire.Id, Amount));
         }
 
         private void FetchSum(object sender, RoutedEventArgs e)
         {
-            SumOfPowersBlock.Text = _empiresManager.GetSumOfPowers().ToString();
+            MessageOnException.Execute(() => SumOfPowersBlock.Text = _empiresManager.GetSumOfPowers().ToString());
         }
 
         private void SavePoint(object sender, RoutedEventArgs e)
         {
-            _empiresManager.SavePoint(SavePointName);
+            MessageOnException.Execute(() => _empiresManager.SavePoint(SavePointName));
         }
 
         private void RollbackToSavePoint(object sender, RoutedEventArgs e)
         {
-            _empiresManager.Rollback(SavePointName);
+            MessageOnException.Execute(() => _empiresManager.Rollback(SavePointName));
         }
 
         private void RollbackTransaction(object sender, RoutedEventArgs e)
         {
-            _empiresManager.Rollback();
+            MessageOnException.Execute(() => _empiresManager.Rollback());
         }
     }
 }

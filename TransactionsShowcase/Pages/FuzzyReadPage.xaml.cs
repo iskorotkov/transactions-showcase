@@ -1,7 +1,10 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
+using TransactionsShowcase.Utils;
 
 namespace TransactionsShowcase.Pages
 {
@@ -66,11 +69,14 @@ namespace TransactionsShowcase.Pages
         {
             FirstEmpireBox.Items.Clear();
             SecondEmpireBox.Items.Clear();
-            foreach (var empire in _empiresManager.GetEmpires())
+            MessageOnException.Execute(() =>
             {
-                FirstEmpireBox.Items.Add(empire);
-                SecondEmpireBox.Items.Add(empire);
-            }
+                foreach (var empire in _empiresManager.GetEmpires())
+                {
+                    FirstEmpireBox.Items.Add(empire);
+                    SecondEmpireBox.Items.Add(empire);
+                }
+            });
         }
     }
 }

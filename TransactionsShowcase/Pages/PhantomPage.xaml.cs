@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using TransactionsShowcase.Db;
+using TransactionsShowcase.Utils;
 
 namespace TransactionsShowcase.Pages
 {
@@ -34,10 +35,13 @@ namespace TransactionsShowcase.Pages
                 Power = int.Parse(EmpirePowerBox.Text),
                 GovernmentTypeId = int.Parse(GovIdBox.Text)
             };
-            _empiresManager.Add(empire);
-
-            SetAlliancePower(null, null);
-            SetEmpireNewName();
+            
+            MessageOnException.Execute(() =>
+            {
+                _empiresManager.Add(empire);
+                SetAlliancePower(null, null);
+                SetEmpireNewName();
+            });
         }
 
         private void SetEmpireNewName()
@@ -47,14 +51,20 @@ namespace TransactionsShowcase.Pages
 
         private void SetAlliancePower(object sender, RoutedEventArgs e)
         {
-            var power = _empiresManager.GetSumOfPowers();
-            _empiresManager.SetOneAlliancePower(power);
+            MessageOnException.Execute(() =>
+            {
+                var power = _empiresManager.GetSumOfPowers();
+                _empiresManager.SetOneAlliancePower(power);
+            });
         }
 
         private void GetAlliancePower(object sender, RoutedEventArgs e)
         {
-            var power = _empiresManager.GetOneAlliancePower();
-            AlliancePowerBlock.Text = power.ToString();
+            MessageOnException.Execute(() =>
+            {
+                var power = _empiresManager.GetOneAlliancePower();
+                AlliancePowerBlock.Text = power.ToString();
+            });
         }
     }
 }
