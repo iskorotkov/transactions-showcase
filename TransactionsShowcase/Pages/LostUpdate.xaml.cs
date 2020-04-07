@@ -28,7 +28,11 @@ namespace TransactionsShowcase.Pages
         {
             try
             {
-                _empiresManager.AddPower(Power);
+                foreach (var item in EmpiresList.EmpireListView.Items)
+                {
+                    var empire = (Empire) item;
+                    _empiresManager.SetPower(empire.Id, empire.Power + Power);
+                }
             }
             catch (Exception exception)
             {

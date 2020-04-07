@@ -63,6 +63,12 @@ namespace TransactionsShowcase.Db
                 new { power }, _transaction);
         }
 
+        public void SetPower(int id, int power)
+        {
+            _connection.Execute("update empires set power = @power where id = @id",
+                new { id, power }, _transaction);
+        }
+
         public void SetGovId(int id)
         {
             _connection.Execute("update empires set government_type_id = @id",
