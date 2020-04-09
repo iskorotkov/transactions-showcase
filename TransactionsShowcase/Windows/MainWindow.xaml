@@ -26,5 +26,9 @@
         <TabItem Header="Phantom">
             <Frame Source="../Pages/PhantomPage.xaml" />
         </TabItem>
+
+        <TabItem Header="Serialization Anomaly">
+            <Frame Source="../Pages/SerializationAnomalyPage.xaml" />
+        </TabItem>
     </TabControl>
 </Window>
