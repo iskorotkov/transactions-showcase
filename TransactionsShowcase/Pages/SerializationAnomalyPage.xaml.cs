@@ -11,6 +11,8 @@ namespace TransactionsShowcase.Pages
     public partial class SerializationAnomalyPage : Page
     {
         private readonly EmpiresManager _empiresManager = new EmpiresManager();
+        private int _powerForWeakest;
+        private int _powerForStrongest;
 
         public SerializationAnomalyPage()
         {
@@ -24,14 +26,24 @@ namespace TransactionsShowcase.Pages
 
         private void SetWeakest(object sender, RoutedEventArgs e)
         {
-            var maxPower = _empiresManager.GetMaxPower();
-            _empiresManager.SetWeakestPower(maxPower * 2);
+            _empiresManager.SetWeakestPower(_powerForWeakest);
         }
 
         private void SetStrongest(object sender, RoutedEventArgs e)
         {
-            var minPower = _empiresManager.GetMinPower();
-            _empiresManager.SetStrongestPower(minPower / 2);
+            _empiresManager.SetStrongestPower(_powerForStrongest);
+        }
+
+        private void CalculatePowerForWeakest(object sender, RoutedEventArgs e)
+        {
+            _powerForWeakest = _empiresManager.GetMaxPower() * 2;
+            PowerForWeakestBlock.Text = _powerForWeakest.ToString();
+        }
+
+        private void CalculatePowerForStrongest(object sender, RoutedEventArgs e)
+        {
+            _powerForStrongest = _empiresManager.GetMinPower() / 2;
+            PowerForStrongestBlock.Text = _powerForStrongest.ToString();
         }
     }
 }

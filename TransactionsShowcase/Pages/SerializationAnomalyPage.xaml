@@ -13,7 +13,17 @@
         <controls:TransactionControl x:Name="TransactionControl" />
 
         <StackPanel Orientation="Horizontal">
+            <TextBlock Text="New power for weakest empires" Name="PowerForWeakestBlock" />
+
+            <Button Content="Calculate" Click="CalculatePowerForWeakest" />
+
             <Button Content="Set weakest empire power" Click="SetWeakest" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="New power for strongest empires" Name="PowerForStrongestBlock" />
+
+            <Button Content="Calculate" Click="CalculatePowerForStrongest" />
 
             <Button Content="Set strongest empire power" Click="SetStrongest" />
         </StackPanel>
