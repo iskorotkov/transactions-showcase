@@ -100,6 +100,36 @@ namespace TransactionsShowcase.Db
             }, _transaction);
         }
 
+        public int GetMaxPower()
+        {
+            return _connection.Query<int>("select max(power) from empires", _transaction)
+                .First();
+        }
+
+        public int GetMinPower()
+        {
+            return _connection.Query<int>("select min(power) from empires", _transaction)
+                .First();
+        }
+
+        public void SetStrongestPower(int power)
+        {
+            _connection.Execute(@"
+                update empires
+                set power = @power
+                where power = (select max(power) from empires)",
+                new { power }, _transaction);
+        }
+
+        public void SetWeakestPower(int power)
+        {
+            _connection.Execute(@"
+                update empires
+                set power = @power
+                where power = (select min(power) from empires)",
+                new { power }, _transaction);
+        }
+
         public void SetOneAlliancePower(int power)
         {
             _connection.Execute(@"
